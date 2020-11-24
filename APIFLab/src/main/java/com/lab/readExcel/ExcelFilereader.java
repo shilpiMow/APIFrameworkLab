@@ -27,7 +27,7 @@ public class ExcelFilereader {
 		String cellValue = null;
 		try {
 			DataFormatter f = new DataFormatter();
-			InputStream file = new FileInputStream(cdir + "src\\test\\resources\\ExelData\\Book1.xlsx");
+			InputStream file = new FileInputStream(cdir + "\\ExelData\\Book1 - Copy.xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 			XSSFSheet sheet = workbook.getSheet(SheetName);
 			CellAddress cellRefe = new CellAddress(cellNumber);
