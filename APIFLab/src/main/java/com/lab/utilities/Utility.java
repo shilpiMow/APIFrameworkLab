@@ -10,7 +10,7 @@ public class Utility {
 	
 	public static Logger getLog(Class clazz) {
 		Logger log=Logger.getLogger(clazz);
-		PropertyConfigurator.configure("C:\\Users\\owner\\Desktop\\New folder (2)\\APIFrameworkLab\\APIFLab\\src\\test\\resources\\log4j.properties");
+		PropertyConfigurator.configure("src/test/resources/log4j.properties");
 		return log;
 
 	}
