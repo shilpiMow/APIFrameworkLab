@@ -8,12 +8,9 @@ import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-<<<<<<< HEAD:APIFLab/src/main/java/com/lab/readExcel/ExcelFilereader.java
-public class ExcelFilereader {
 //	static String cellv = null;
-=======
 public class API_Excel {
->>>>>>> 4ec5e0471f1b486f87e529fc81f36da9e9132c36:APIFLab/src/test/java/com/API/excel/API_Excel.java
+
 
 	static String cdir = System.getProperty("user.dir");
 	public static void main(String[] args) {
