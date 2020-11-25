@@ -19,7 +19,7 @@ public class ExcelFilereader {
 	
 	public static void main(String[] args) throws IOException {
 		
-		readToExcel("newpage1","A2");
+		readToExcel("newpage1","A1");
 		
 	}
 
@@ -27,7 +27,7 @@ public class ExcelFilereader {
 		String cellValue = null;
 		try {
 			DataFormatter f = new DataFormatter();
-			InputStream file = new FileInputStream(cdir + "Book1 - Copy.xlsx");
+			InputStream file = new FileInputStream(cdir + "\\src\\test\\resources\\ExelData\\Book1.xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 			XSSFSheet sheet = workbook.getSheet(SheetName);
 			CellAddress cellRefe = new CellAddress(cellNumber);
