@@ -11,12 +11,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class API_Excel {
 
 	static String cdir = System.getProperty("user.dir");
-	
+	public static void main(String[] args) {
+		System.out.println(cdir);
+	}
 	public static String readExcel(String SheetName, String cellNumber) {
 		String cellValue = null;
 		try {
 			DataFormatter f = new DataFormatter();
-			InputStream file = new FileInputStream(cdir + "\\src\\main\\resources\\Files\\Book1.xlsx");
+			InputStream file = new FileInputStream(cdir + "\\src\\test\\resources\\Files\\Book1.xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 			XSSFSheet sheet = workbook.getSheet(SheetName);
 			CellAddress cellRefe = new CellAddress(cellNumber);
