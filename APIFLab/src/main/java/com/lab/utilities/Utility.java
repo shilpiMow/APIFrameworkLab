@@ -6,6 +6,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import junit.framework.Assert;
+
 public class Utility {
 	
 	public static Logger getLog(Class clazz) {
@@ -29,5 +31,4 @@ public static Properties readPropFile() {
 	}
 	return pro;
 }
-
 }

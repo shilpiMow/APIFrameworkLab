@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelFilereader {
-	static String cellv = null;
+//	static String cellv = null;
 
 	static String cdir = System.getProperty("user.dir");
 	
