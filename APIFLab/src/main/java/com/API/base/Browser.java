@@ -1,4 +1,4 @@
-package com.lab.base;
+package com.API.base;
 
 public class Browser {
 
