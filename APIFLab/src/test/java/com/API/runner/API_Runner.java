@@ -10,7 +10,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		features = {"src\\test\\java\\com\\API\\features\\Rest_API.feature"},
         glue= {"com.API.Steps"},
 		//tags= {"@test"},
-		plugin = {"json:target/CucumberReport/Cucmber.json"}
+		plugin = {"pretty", "json:target/report.json"}
 		)
 
 @Test
