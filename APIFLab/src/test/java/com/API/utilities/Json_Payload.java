@@ -1,8 +1,15 @@
 package com.API.utilities;
 import java.util.Map;
-import org.json.simple.JSONObject;
+
+import org.json.JSONObject;
+
 
 public class Json_Payload {
+	
+	
+	public static String patchBody(String in) {
+		return in;
+	}
 
 	/**
 	 * This method will take HashMap as a parameter then return a Json payload.

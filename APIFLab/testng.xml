@@ -6,4 +6,5 @@
 			<class name="com.API.runner.API_Runner">
 			</class>
 		</classes>
+		</test>
 </suite> <!-- Suite -->

@@ -46,10 +46,11 @@ public class Rest_Utility {
 	 */
 	public static void printVerify(Map<String, Map<String, String>> value, Response r) {
 		Map<String, String> keyy = value.get("VAL");
+		
 		for (Map.Entry<String, String> entry : keyy.entrySet()) {
-
+          
 			if (r.body().jsonPath().getString(entry.getKey()).equals(entry.getValue())) {
-				System.out.println("The actual " + entry.getKey() + " and expected are matched");
+				System.out.println("The actual is " + Rest_Steps.res.jsonPath().getString(entry.getKey()) + " and expected " +entry.getValue() +" are matched");
 			} else {
 				System.out.println("The actual and expected did not match");
 				System.out.println("The expected value is: " + entry.getValue());

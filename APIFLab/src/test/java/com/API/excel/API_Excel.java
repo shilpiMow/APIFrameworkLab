@@ -14,13 +14,13 @@ public class API_Excel {
 	public static void main(String[] args) {
 		System.out.println(cdir);
 	}
-	public static String readExcel(String SheetName, String cellNumber) {
+	public static String readExcel(String cellNumber) {
 		String cellValue = null;
 		try {
 			DataFormatter f = new DataFormatter();
 			InputStream file = new FileInputStream(cdir + "\\src\\test\\resources\\Files\\Book1.xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
-			XSSFSheet sheet = workbook.getSheet(SheetName);
+			XSSFSheet sheet = workbook.getSheet("Sheet1");
 			CellAddress cellRefe = new CellAddress(cellNumber);
 			Row row = sheet.getRow(cellRefe.getRow());
 			Cell cell = row.getCell(cellRefe.getColumn());

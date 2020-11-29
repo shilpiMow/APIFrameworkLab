@@ -1,38 +1,40 @@
 package com.API.Steps;
-import java.util.HashMap;
+
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
+
 import com.API.excel.API_Excel;
-import com.API.utilities.Json_Payload;
 import com.API.utilities.Utilities;
 import com.API.utilities.API_Calls;
+import com.API.utilities.Rest_Utility;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 
 public class Rest_Steps {
 	public static Response res;
 	public static JSONObject jsn;
-	public static Map<String, String> storingExcel = new HashMap<String, String>();
 	public static JSONObject updateInfo = new JSONObject();
-	private static Logger log= Utilities.getLog(Rest_Steps.class);
+	private static Logger log = Utilities.getLog(Rest_Steps.class);
+	public static String info = null;
+	Properties p = Utilities.readPropFile();
+	String base_uri = p.get("base_uri").toString();
+	String specific_endpoint = p.get("specific_endpoint").toString();
+	String general_endpoint = p.get("general_endpoint").toString();
+	@Given("^I send a  \"([^\"]*)\" call  to create a new user$")
+	public void i_send_a_call_to_create_a_new_user(String arg1, DataTable data) throws Throwable {
 
-
-	@Given("^I want to create a new user through \"([^\"]*)\" call from Excel file \"([^\"]*)\" for the BaseUri \"([^\"]*)\" and endpoint \"([^\"]*)\"$")
-
-	public void i_want_to_create_a_new_user_through_call_from_Excel_file_for_the_BaseUri_and_endpoint(String arg1,String arg2, String arg3, String arg4, Map<String, String> data) throws Throwable {
-        log.info("Creating a new user");
-		for (Map.Entry<String, String> entry : data.entrySet()) {
-			storingExcel.put(API_Excel.readExcel(arg2, entry.getKey()), API_Excel.readExcel(arg2, entry.getValue()));
-
-		}
-		
-		jsn = Json_Payload.payload(storingExcel);
-		res = API_Calls.executeRquest(arg1, arg3, arg4);
-
+		List<List<String>> v = data.raw();
+		info = API_Excel.readExcel(v.get(0).get(0));
+		res = API_Calls.executeRquest(arg1, base_uri, general_endpoint);
+		res.prettyPrint();
 	}
 
 	@Then("^I verify that the user is created through HTTP Status code$")
@@ -46,12 +48,14 @@ public class Rest_Steps {
 
 	}
 
-	@Then("^I want to retrieve the users Info through \"([^\"]*)\" call from the BaseUri \"([^\"]*)\" and endpoint \"([^\"]*)\"$")
-	public void i_want_to_retrieve_the_users_Info_through_call_from_the_BaseUri_and_endpoint(String arg1, String arg2,
-			String arg3) throws Throwable {
-		log.info("retrieving a users info");
-		res = API_Calls.executeRquest(arg1, arg2, arg3);
+
+
+	@Then("^I want to retrieve the users Info through \"([^\"]*)\" call$")
+	public void i_want_to_retrieve_the_users_Info_through_call(String arg1) throws Throwable {
+
+		res = API_Calls.executeRquest(arg1, base_uri, specific_endpoint);
 		res.prettyPrint();
+
 	}
 
 	@Then("^Also verify that I got the users info through HTTP Status code$")
@@ -63,20 +67,17 @@ public class Rest_Steps {
 			System.out.println("For retriving a  Users info a invalid HTTP code " + res.statusCode() + " occured");
 		}
 	}
+	
+	
+	
+	
+	@Then("^I want to update the users Info through \"([^\"]*)\"  call$")
+	public void i_want_to_update_the_users_Info_through_call(String arg1, DataTable holding) throws Throwable {
 
-	@SuppressWarnings("unchecked")
-	@Then("^I want to update the users Info through \"([^\"]*)\"  call from Excel file \"([^\"]*)\" for the BaseUri \"([^\"]*)\"  and endpoint \"([^\"]*)\"$")
-	public void i_want_to_update_the_users_Info_through_call_from_Excel_file_for_the_BaseUri_and_endpoint(String arg1,
-			String arg2, String arg3, String arg4, Map<String, String> data) throws Throwable {
-		log.info("Updating users info");
-		for (Map.Entry<String, String> entry : data.entrySet()) {
-			updateInfo.put(API_Excel.readExcel(arg2, entry.getKey()), API_Excel.readExcel(arg2, entry.getValue()));
-
-		}
-
-		res = API_Calls.executeRquest(arg1, arg3, arg4);
-		res.prettyPrint();
-
+		List<List<String>> v = holding.raw();
+		info = API_Excel.readExcel(v.get(0).get(0));
+		res = API_Calls.executeRquest(arg1, base_uri, specific_endpoint);
+     res.prettyPrint();
 	}
 
 	@When("^verifying I should get an valid HTTP code for updating$")
@@ -90,14 +91,25 @@ public class Rest_Steps {
 
 	}
 
-	@Then("^I want to delete an user through \"([^\"]*)\" call from the BaseUri \"([^\"]*)\" and endpoint \"([^\"]*)\"$")
-	public void i_want_to_delete_an_user_through_call_from_the_BaseUri_and_endpoint(String arg1, String arg2,
-			String arg3) throws Throwable {
-		log.info("Deleting a user");
-		res = API_Calls.executeRquest(arg1, arg2, arg3);
-		res.prettyPrint();
+
+	@Then("^I verify all the VAL$")
+	public void i_verify_all_the_VAL(DataTable data) throws Throwable {
+		Map<String, Map<String, String>> infor = Rest_Utility.mangeInputData(data);
+		Rest_Utility.printVerify(infor, res);
+		 
+
 
 	}
+	
+	
+	
+	@Then("^I want to delete an user through \"([^\"]*)\" call$")
+	public void i_want_to_delete_an_user_through_call(String arg1) throws Throwable {
+		res = API_Calls.executeRquest(arg1, base_uri, specific_endpoint);
+		res.prettyPrint();
+	
+	}
+
 
 	@Then("^verify that I deleted the users info through HTTP Status code$")
 	public void verify_that_I_deleted_the_users_info_through_HTTP_Status_code() throws Throwable {

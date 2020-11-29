@@ -1,4 +1,6 @@
 package com.API.utilities;
+
+
 import com.API.Steps.Rest_Steps;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -15,7 +17,7 @@ public class API_Calls {
 	 */
 	public static RequestSpecification request;
 
-	public static Response executeRquest(String request, String baseuri, String endPoint) {
+	public static Response executeRquest(String request, String baseuri, String endPoint)  {
 		String req = request.toLowerCase();
 		Response res = null;
 		if (req.equals("get")) {
@@ -52,11 +54,11 @@ public class API_Calls {
 	 * @return Response
 	 */
 	public static Response post(String endpoint, String baseU) {
-		String value = Rest_Steps.jsn.toString();
 		RestAssured.baseURI = baseU;
 		request = RestAssured.given();
 
-		Response res = request.contentType(ContentType.JSON).body(value).post(endpoint);
+		Response res = request.contentType(ContentType.JSON).body(Rest_Steps.info).post(endpoint);
+		
 		return res;
 	}
 
@@ -66,12 +68,13 @@ public class API_Calls {
 	 * 
 	 * @param endpoint,baseuri
 	 * @return Response
+	 * @throws ParseException 
 	 */
 	public static Response patch(String endpoint, String baseU) {
-		String value = Rest_Steps.updateInfo.toJSONString();
+		//Json_Payload.patchBody(Rest_Steps.info
 		RestAssured.baseURI = baseU;
 		RequestSpecification request = RestAssured.given();
-		Response res = request.contentType(ContentType.JSON).body(value).patch(endpoint);
+		Response res = request.contentType(ContentType.JSON).body(Rest_Steps.info).patch(endpoint);
 		return res;
 	}
 
