@@ -16,7 +16,13 @@ public class Utilities {
 	
 	public static Logger getLog(Class clazz) {
 		Logger log = Logger.getLogger(clazz);
-		PropertyConfigurator.configure("src/test/resources/log4j.properties");
+		String osName=System.getProperty("os.name");
+		if(osName.contains("Mac")) {
+			PropertyConfigurator.configure("src/test/resources/log4j.properties");	
+		}else {
+			PropertyConfigurator.configure("src\\test\\resources\\log4j.properties");
+		}
+		
 		return log;
 
 	}
