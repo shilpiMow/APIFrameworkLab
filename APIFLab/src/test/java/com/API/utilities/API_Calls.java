@@ -54,10 +54,11 @@ public class API_Calls {
 	 * @return Response
 	 */
 	public static Response post(String endpoint, String baseU) {
+		
 		RestAssured.baseURI = baseU;
 		request = RestAssured.given();
 
-		Response res = request.contentType(ContentType.JSON).body(Rest_Steps.info).post(endpoint);
+		Response res = request.contentType(ContentType.JSON).body(Rest_Steps.excelValue).post(endpoint);
 		
 		return res;
 	}
@@ -74,7 +75,7 @@ public class API_Calls {
 		//Json_Payload.patchBody(Rest_Steps.info
 		RestAssured.baseURI = baseU;
 		RequestSpecification request = RestAssured.given();
-		Response res = request.contentType(ContentType.JSON).body(Rest_Steps.info).patch(endpoint);
+		Response res = request.contentType(ContentType.JSON).body(Rest_Steps.excelValue).patch(endpoint);
 		return res;
 	}
 

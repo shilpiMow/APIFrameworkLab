@@ -8,19 +8,14 @@ import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-//	static String cellv = null;
 public class API_Excel {
 
-
-	static String cdir = System.getProperty("user.dir");
-	public static void main(String[] args) {
-		System.out.println(cdir);
-	}
-	public static String readExcel(String cellNumber) {
+	
+	public static String readExcel(String cellNumber,String excel) {
 		String cellValue = null;
 		try {
 			DataFormatter f = new DataFormatter();
-			InputStream file = new FileInputStream(cdir + "\\src\\test\\resources\\Files\\Book1.xlsx");
+			InputStream file = new FileInputStream(excel);
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 			XSSFSheet sheet = workbook.getSheet("Sheet1");
 			CellAddress cellRefe = new CellAddress(cellNumber);
